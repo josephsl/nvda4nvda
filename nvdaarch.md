@@ -2,10 +2,9 @@
 Explaining NVDA's architecture for developers by developers
 Joseph Lee
 
+Revision 1.0 (2017)
 
-Revision 1.0 (October 2014)
-
-Welcome to NVDA to NVDA: NonVisual Developer's Aid to NonVisual Desktop access.
+Welcome to NVDA 4 NVDA: NonVisual Developer's Aid for NonVisual Desktop access.
 
 ## Contents
 
@@ -25,18 +24,22 @@ Welcome to NVDA to NVDA: NonVisual Developer's Aid to NonVisual Desktop access.
 * Teaching Python to NVDA: Python modules
 * Equipping NVDA for its work: dependencies
 * Why Python 2?
+* Impact of moving to Python 3
 * NVDA modules: an overview
 * Accessibility API handlers
 * Input from keyboard, mouse, braille and touch
 * Speech and braille output
 * Core loop and event handlers
-* Virtual buffers and document navigation management
+* App modules and NVDA objects
+* Virtual buffers, browse mode and document navigation management
 * NVDA GUI and configuration subsystem
+* Math presentation and content recognition frameworks
 * Add-ons
 4. NVDA's view of screen controls and GUI elements
 * Object representation and navigation
 * Reacting to keyboard input, focus and caret changes
 * Reacting to events from applications
+* Control behaviors
 * Display model: scraping the screen for data
 * Fast inter-process communication with NVDA Helper
 * Secure screens and applications with administrator privileges
@@ -50,11 +53,12 @@ Welcome to NVDA to NVDA: NonVisual Developer's Aid to NonVisual Desktop access.
 * Working around broken UIA implementations
 * UIA and recent versions of Windows
 * Java Access Bridge and Java applications
-6. Virtual buffers and document navigation
+6. Virtual buffers, browse mode  and document navigation
 * Virtual buffers
 * ARIA
 * Issues with specific virtual buffer implementations
 * PDF documents
+* Differences between virtual buffers and browse mode
 7. Interpreting and presenting content
 * Control types and states and their effects on speech and braille
 * Speech dictionaries and patterns
@@ -68,14 +72,20 @@ Welcome to NVDA to NVDA: NonVisual Developer's Aid to NonVisual Desktop access.
 * Preference dialogs
 * Logging and log viewer
 * Add-ons management, installation, import and removal
-* Miscellaneous GUI elements
-9. Debugging NVDA
+* Miscellaneous GUI elements and GUI controls helper
+9. Math presentation and content recognition frameworks
+* MathML
+* Interacting with math via MathPlayer and MathType
+* Content recognition frameworks
+* Windows 10 OCR
+10. Debugging and testing NVDA
 * Log viewer and log levels
 * Application crash dumps
 * Local and Remote Python Consoles
 * Source code level debugging
 * Knowing which modules to debug
 * Debugging speech and braille
+* Unit tests
 
 Appendix A: Installation, startup and shutdown routines
 A.1. Installation and portable copy generation
@@ -92,4 +102,15 @@ C.3. Project workflow
 C.4. Issue tracking and patch submission
 C.5. Localization
 C.6. Snapshots and releases
+
+Appendix D: Essential Python
+D.1. Python compatibility
+D.2. Statements, syntax, and indentation
+D.3. Imports and variables
+D.4. Conditionals
+D.5. While and for loops
+D.6. Functions
+D.7. Classes and objects
+D.8. Lists, dictionaries, sets and other data structures
+D.9. Modules and Python standard library
 
