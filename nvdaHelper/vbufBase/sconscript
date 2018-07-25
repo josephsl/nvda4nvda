@@ -1,0 +1,13 @@
+Import([
+	'env',
+	'remoteLib',
+])
+
+vbufBaseObjs=[env.Object(x) for x in (
+		"storage.cpp",
+		"utils.cpp",
+		"backend.cpp",
+)]
+vbufBaseObjs.append(remoteLib[2])
+
+Return('vbufBaseObjs')

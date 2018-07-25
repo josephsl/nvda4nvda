@@ -1,0 +1,94 @@
+/*
+This file is a part of the NVDA project.
+URL: http://www.nvda-project.org/
+Copyright 2006-2010 NVDA contributers.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License version 2.0, as published by
+    the Free Software Foundation.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+This license can be found at:
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+*/
+
+cpp_quote("/*")
+cpp_quote("This file is a part of the NVDA project.")
+cpp_quote("URL: http://www.nvda-project.org/")
+cpp_quote("Copyright 2006-2010 NVDA contributers.")
+cpp_quote("This program is free software: you can redistribute it and/or modify")
+cpp_quote("it under the terms of the GNU General Public License version 2.0, as published by")
+cpp_quote("the Free Software Foundation.")
+cpp_quote("This program is distributed in the hope that it will be useful,")
+cpp_quote("but WITHOUT ANY WARRANTY; without even the implied warranty of")
+cpp_quote("MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.")
+cpp_quote("This license can be found at:")
+cpp_quote("http://www.gnu.org/licenses/old-licenses/gpl-2.0.html")
+cpp_quote("*/")
+
+/**
+ * Methods  to control NVDA via NVDA in-process code.
+ */
+[
+	uuid(B8934CDF-D229-40f0-A082-0F60D39F44D7),
+	version(1.0),
+]
+interface NvdaControllerInternal {
+
+	error_status_t __stdcall requestRegistration([in,string] const wchar_t* uuidString);
+
+/**
+ * Notifies NVDA that the keyboard layout has changed for this thread. 
+ * @param threadID the thread the layout change occured in
+ * @param hkl the current layout retreaved either by GetKeyboardLayout or the lParam of wm_inputLangChange.
+ * @param layoutString the current identifier string returned from GetKeyboardLayoutName.
+ */
+	error_status_t __stdcall inputLangChangeNotify([in] const long threadID, [in] const unsigned long hkl, [in,string] const wchar_t* layoutString);
+
+/**
+ * Notifies NVDA that a character has been typed in this thread.
+ * @param threadID the thread the layout change occured in
+ * @param ch the character typed.
+ */
+	error_status_t __stdcall typedCharacterNotify([in] const long threadID, [in] const wchar_t ch);
+
+/**
+ * Notifies NVDA that text in the given rectangle (in screen coordinates), in the given window, has changed.
+ */
+	error_status_t __stdcall displayModelTextChangeNotify([in] const long hwnd, [in] const long left, [in] const long top, [in] const long right, [in] const long bottom); 
+
+/**
+ * Logs a message at the given level to NVDA
+ * @param level the level of the message
+ * @param process Id of the process where the message is sent from
+ * @param message the log message
+ */
+	error_status_t __stdcall logMessage([in] const long level, [in] const long processID, [in,string] const wchar_t* message);
+
+/**
+ * Notifies NVDA of updates to the current input composition (including the full content, the selection offsets and the newly added text if any).
+ */
+	error_status_t __stdcall inputCompositionUpdate([in,string] const wchar_t* compositionString, [in] const int selectionStart, [in] const int selectionEnd, [in] const int isReading);
+
+	error_status_t __stdcall inputCandidateListUpdate([in,string] const wchar_t* candidates, [in] const long selectionIndex, [in,string] const wchar_t* inputMethod);
+
+	error_status_t __stdcall IMEOpenStatusUpdate([in] const long open);
+
+	error_status_t __stdcall inputConversionModeUpdate([in] const long oldFlags, [in] const long newFlags,[in] const unsigned long lcid);
+
+/**
+ * Notifies NVDA that a virtual buffer has changed.
+ */
+	error_status_t __stdcall vbufChangeNotify([in] const int rootDocHandle, [in] const int rootID);
+
+/**
+* Requests for installation of the add-on package from specified path.
+* @param addonPath path to the add-on package file.
+*/
+	error_status_t __stdcall installAddonPackageFromPath([in, string] const wchar_t* addonPath);
+
+/**
+ * Notifies NVDA that a focus rect has been drawn in the given window.
+ */
+	error_status_t __stdcall drawFocusRectNotify([in] const long hwnd, [in] const long left, [in] const long top, [in] const long right, [in] const long bottom);   
+};
